@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>グループに参加｜クイック割り勘</title>
+<meta name="description" content="割り勘アプリ「クイック割り勘」のグループへの招待">
+<meta name="robots" content="noindex">
+<link rel="icon" href="icon.png">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .code { font-size: 32px; font-weight: 800; letter-spacing: 6px; text-align: center; margin: 8px 0 4px; }
+  .btn { display: block; text-align: center; background: var(--primary); color: #fff; text-decoration: none; font-weight: 700; padding: 14px; border-radius: 12px; margin: 12px 0; }
+  ol li { margin-bottom: 6px; }
+</style>
+</head>
+<body>
+<main>
+  <header class="app">
+    <img src="icon.png" alt="クイック割り勘のアイコン">
+    <div>
+      <h1>グループに招待されました</h1>
+      <div class="sub">クイック割り勘</div>
+    </div>
+  </header>
+
+  <div class="card">
+    <div class="sub" style="text-align:center">招待コード</div>
+    <div class="code" id="code">--------</div>
+    <a class="btn" id="open" href="quickwarikan://join">アプリで開いて参加する</a>
+    <div class="sub">ボタンで開けないときは、アプリのホーム画面の「招待コードで参加」に、上のコードを入れてください。</div>
+  </div>
+
+  <h2>アプリをまだ入れていない方</h2>
+  <ol>
+    <li>App Store で「クイック割り勘」を入れます（公開準備中）。</li>
+    <li>このページに戻って「アプリで開いて参加する」を押すか、招待コードを入力します。</li>
+  </ol>
+
+  <footer>
+    <a href="./">サポート</a>　｜　<a href="privacy.html">プライバシーポリシー</a>　｜　運営：ケツアッコー
+  </footer>
+</main>
+<script>
+  // 招待コードは英大文字と数字の8文字だけを受け付ける
+  var raw = new URLSearchParams(location.search).get('code') || '';
+  var code = raw.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 8);
+  if (code.length === 8) {
+    document.getElementById('code').textContent = code;
+    document.getElementById('open').href = 'quickwarikan://join/' + code;
+  } else {
+    document.getElementById('code').textContent = '（コードがありません）';
+  }
+</script>
+</body>
+</html>
